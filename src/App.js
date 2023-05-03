@@ -1,5 +1,11 @@
+import Clock from "./components/clock/clock";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <Clock />
+    </>
+  );
 }
 
 export default App;
