@@ -23,6 +23,7 @@ const ClockHand = styled.div`
   transform-origin: bottom;
   border: 1px solid #000000;
   border-radius: 10px;
+  transform: rotate(${(props) => props.degree}deg);
 `;
 
 const HourHand = styled(ClockHand)`
