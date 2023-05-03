@@ -10,6 +10,9 @@ import {
 } from "./style";
 
 const Clock = () => {
+  const { hourDegree, minuteDegree, secondDegree } = useClockStore().time;
+  const { setTimeDegrees } = useClockStore();
+
   // 최초 렌더링시 현재 시각을 반영
   useEffect(() => {
     const date = new Date();
@@ -17,11 +20,12 @@ const Clock = () => {
     const minute = date.getMinutes();
     const second = date.getSeconds();
 
-    setSecondDegree(second * (360 / 60));
-    setMinuteDegree(minute * (360 / 60) + second * (6 / 60));
-    setHourDegree(
-      hour * (360 / 24) + minute * (30 / 360) + second * (30 / 3600)
-    );
+    const newSecondDegree = second * (360 / 60);
+    const newMinuteDegree = minute * (360 / 60) + second * (6 / 60);
+    const newHourDegree =
+      hour * (360 / 24) + minute * (30 / 360) + second * (30 / 3600);
+
+    setTimeDegrees({ newHourDegree, newMinuteDegree, newSecondDegree });
   }, []);
 
   // 매초마다 각도를 업데이트
@@ -41,9 +45,6 @@ const Clock = () => {
     return () => clearInterval(timer);
   });
 
-  const { hourDegree, minuteDegree, secondDegree } = useClockStore().time;
-  const { setHourDegree, setMinuteDegree, setSecondDegree, setTimeDegrees } =
-    useClockStore();
   // console.log("h", hourDegree);
   // console.log("m", minuteDegree);
   // console.log("s", secondDegree);
