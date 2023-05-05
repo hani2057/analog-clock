@@ -1,8 +1,19 @@
 import React from "react";
 
-const Tooltip = ({ position: { left, top } }) => {
+import { TooltipWrapper } from "./style";
+import { useTooltipStore } from "../../stores/tooltip-store";
+
+const Tooltip = () => {
+  const { left, top } = useTooltipStore().tooltipState;
+
+  const date = new Date();
+  const isAM = Boolean(date.getHours() < 12);
+
   return (
-    <div style={{ position: "absolute", left: left, top: top }}>Tooltip</div>
+    <TooltipWrapper left={left} top={top}>
+      <p>{isAM ? "오전" : "오후"}</p>
+      <p>{`${date.getHours()} : ${date.getMinutes()}`}</p>
+    </TooltipWrapper>
   );
 };
 

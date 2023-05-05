@@ -43,7 +43,7 @@ const Clock = () => {
 
   // 툴팁 위치를 마우스 위치로 지정
   const moveTooltip = (e) =>
-    setTooltipPosition({ left: e.clientX, top: e.clientY });
+    setTooltipPosition({ left: e.clientX + 20, top: e.clientY - 70 });
 
   return (
     <ClockWrapper>
