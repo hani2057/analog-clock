@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/github.io/analog-clock/static/js/main.8800d6cc.js",
-    "static/js/787.2df2f174.chunk.js": "/github.io/analog-clock/static/js/787.2df2f174.chunk.js",
-    "index.html": "/github.io/analog-clock/index.html",
-    "main.8800d6cc.js.map": "/github.io/analog-clock/static/js/main.8800d6cc.js.map",
-    "787.2df2f174.chunk.js.map": "/github.io/analog-clock/static/js/787.2df2f174.chunk.js.map"
+    "main.js": "/analog-clock/static/js/main.2f3e7569.js",
+    "static/js/787.2df2f174.chunk.js": "/analog-clock/static/js/787.2df2f174.chunk.js",
+    "index.html": "/analog-clock/index.html",
+    "main.2f3e7569.js.map": "/analog-clock/static/js/main.2f3e7569.js.map",
+    "787.2df2f174.chunk.js.map": "/analog-clock/static/js/787.2df2f174.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.8800d6cc.js"
+    "static/js/main.2f3e7569.js"
   ]
 }
