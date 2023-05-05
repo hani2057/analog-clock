@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 
+import { useClockStore } from "../../stores/clock-store";
 import { useTooltipStore } from "../../stores/tooltip-store";
 import {
   ClockBody,
@@ -14,22 +15,32 @@ const Clock = () => {
   const { setShowTooltip, setTooltipPosition } = useTooltipStore();
 
   // 시계 관련 상태
+  const { setTime } = useClockStore();
   const [timeDegrees, setTimeDegrees] = useState({
     hourDegree: 0,
     minuteDegree: 0,
     secondDegree: 0,
   });
 
-  // 최초 렌더링시 현재 시각을 반영
   useEffect(() => {
+    // 최초 렌더링시 현재 시각을 반영
+    setTimeAndDegrees();
+
+    // 매초마다 시각을 업데이트
+    const updateTime = setInterval(() => setTimeAndDegrees(), 1000);
+    return () => clearInterval(updateTime);
+  }, []);
+
+  // 시각과 각도를 현재 시각으로 지정
+  const setTimeAndDegrees = () => {
     const date = new Date();
     const hour = date.getHours();
     const minute = date.getMinutes();
     const second = date.getSeconds();
 
-    const timeDegrees = timeToDegree(hour, minute, second);
-    setTimeDegrees(timeDegrees);
-  }, []);
+    setTime({ hour, minute, second });
+    setTimeDegrees(timeToDegree(hour, minute, second));
+  };
 
   // 시각을 각도로 변환
   const timeToDegree = (hour, minute, second) => {

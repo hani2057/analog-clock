@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import { useTooltipStore } from "../../stores/tooltip-store";
 import { useClockStore } from "../../stores/clock-store";
@@ -6,34 +6,7 @@ import { TooltipWrapper } from "./style";
 
 const Tooltip = () => {
   const { left, top } = useTooltipStore().tooltipState;
-  const {
-    time: { hour, minute, second },
-    setTime,
-  } = useClockStore();
-
-  // 최초 렌더링시 현재 시각을 반영
-  useEffect(() => {
-    const date = new Date();
-    const hour = date.getHours();
-    const minute = date.getMinutes();
-    const second = date.getSeconds();
-
-    setTime({ hour, minute, second });
-  }, []);
-
-  // 매초마다 시각을 업데이트
-  useEffect(() => {
-    const updateTime = setInterval(() => {
-      const date = new Date();
-      const hour = date.getHours();
-      const minute = date.getMinutes();
-      const second = date.getSeconds();
-
-      setTime({ hour, minute, second });
-    });
-
-    return () => clearInterval(updateTime);
-  }, []);
+  const { hour, minute, second } = useClockStore().time;
 
   const isAM = Boolean(hour < 12);
 
