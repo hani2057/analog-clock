@@ -35,8 +35,7 @@ const Clock = () => {
   const timeToDegree = (hour, minute, second) => {
     const secondDegree = second * (360 / 60);
     const minuteDegree = minute * (360 / 60) + second * (6 / 60);
-    const hourDegree =
-      (hour % 12) * (360 / 24) + minute * (30 / 360) + second * (30 / 3600);
+    const hourDegree = (hour % 12) * (360 / 12) + minute * (30 / 60);
 
     return { hourDegree, minuteDegree, secondDegree };
   };
