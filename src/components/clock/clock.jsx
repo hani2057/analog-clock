@@ -23,7 +23,7 @@ const Clock = () => {
     const newSecondDegree = second * (360 / 60);
     const newMinuteDegree = minute * (360 / 60) + second * (6 / 60);
     const newHourDegree =
-      hour * (360 / 24) + minute * (30 / 360) + second * (30 / 3600);
+      (hour % 12) * (360 / 24) + minute * (30 / 360) + second * (30 / 3600);
 
     setTimeDegrees({ newHourDegree, newMinuteDegree, newSecondDegree });
   }, []);
