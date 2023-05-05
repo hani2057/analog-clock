@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import { useClockStore } from "../../stores/clock-store";
+import { useTooltipStore } from "../../stores/tooltip-store";
 import {
   ClockBody,
   ClockWrapper,
@@ -10,8 +11,12 @@ import {
 } from "./style";
 
 const Clock = () => {
+  // 시계 관련 상태
   const { hourDegree, minuteDegree, secondDegree } = useClockStore().time;
   const { setTimeDegrees } = useClockStore();
+
+  // 툴팁 관련 상태
+  const { setShowTooltip, setTooltipPosition } = useTooltipStore();
 
   // 최초 렌더링시 현재 시각을 반영
   useEffect(() => {
@@ -45,13 +50,16 @@ const Clock = () => {
     return () => clearInterval(timer);
   });
 
-  // console.log("h", hourDegree);
-  // console.log("m", minuteDegree);
-  // console.log("s", secondDegree);
+  const moveTooltip = (e) =>
+    setTooltipPosition({ left: e.clientX, top: e.clientY });
 
   return (
     <ClockWrapper>
-      <ClockBody>
+      <ClockBody
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
+        onMouseMove={(e) => moveTooltip(e)}
+      >
         <HourHand degree={hourDegree} />
         <MinuteHand degree={minuteDegree} />
         <SecondHand degree={secondDegree} />
