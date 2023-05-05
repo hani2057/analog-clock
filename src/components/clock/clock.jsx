@@ -8,6 +8,9 @@ import {
   HourHand,
   MinuteHand,
   SecondHand,
+  HourMarkerWrapper,
+  HourMarkerDiv,
+  HourMarker,
 } from "./style";
 
 const Clock = () => {
@@ -62,6 +65,17 @@ const Clock = () => {
         onMouseLeave={() => setShowTooltip(false)}
         onMouseMove={(e) => moveTooltip(e)}
       >
+        {/* 시계 숫자 */}
+        <HourMarkerWrapper>
+          {Array.from({ length: 6 }, (_, i) => i + 1).map((num) => (
+            <HourMarkerDiv degree={30 * (num - 3)} key={num}>
+              <HourMarker degree={30 * (3 - num)}>{6 + num}</HourMarker>
+              <HourMarker degree={30 * (3 - num)}>{0 + num}</HourMarker>
+            </HourMarkerDiv>
+          ))}
+        </HourMarkerWrapper>
+
+        {/* 시계 바늘 */}
         <HourHand degree={timeDegrees.hourDegree} />
         <MinuteHand degree={timeDegrees.minuteDegree} />
         <SecondHand degree={timeDegrees.secondDegree} />

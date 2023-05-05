@@ -47,4 +47,36 @@ const SecondHand = styled(ClockHand)`
   left: calc(50% - 1.5px);
 `;
 
-export { ClockWrapper, ClockBody, HourHand, MinuteHand, SecondHand };
+const HourMarkerWrapper = styled(ClockBody)`
+  height: 100%;
+  border: none;
+`;
+
+const HourMarkerDiv = styled.div`
+  position: absolute;
+  top: calc(50% - 25px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  transform: rotate(${({ degree }) => degree}deg);
+  transform-origin: center 25px;
+`;
+
+const HourMarker = styled.span`
+  font-size: 30px;
+  padding: 0 30px;
+  transform: rotate(${({ degree }) => degree}deg);
+`;
+
+export {
+  ClockWrapper,
+  ClockBody,
+  HourHand,
+  MinuteHand,
+  SecondHand,
+  HourMarkerWrapper,
+  HourMarkerDiv,
+  HourMarker,
+};
