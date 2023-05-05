@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/hani2057/analog-clock/static/js/main.a9b0b0e2.js",
+    "static/js/787.2df2f174.chunk.js": "/hani2057/analog-clock/static/js/787.2df2f174.chunk.js",
+    "index.html": "/hani2057/analog-clock/index.html",
+    "main.a9b0b0e2.js.map": "/hani2057/analog-clock/static/js/main.a9b0b0e2.js.map",
+    "787.2df2f174.chunk.js.map": "/hani2057/analog-clock/static/js/787.2df2f174.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.a9b0b0e2.js"
+  ]
+}
