@@ -2,17 +2,10 @@ import { create } from "zustand";
 
 export const useClockStore = create((set) => ({
   time: {
-    hourDegree: 0,
-    minuteDegree: 0,
-    secondDegree: 0,
+    hour: 0,
+    minute: 0,
+    second: 0,
   },
-  setTimeDegrees: ({ newHourDegree, newMinuteDegree, newSecondDegree }) => {
-    set(() => ({
-      time: {
-        hourDegree: newHourDegree,
-        minuteDegree: newMinuteDegree,
-        secondDegree: newSecondDegree,
-      },
-    }));
-  },
+  setTime: ({ hour, minute, second }) =>
+    set(() => ({ time: { hour, minute, second } })),
 }));
