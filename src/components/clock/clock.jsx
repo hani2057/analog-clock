@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-import { useClockStore } from "../../stores/clock-store";
 import { useTooltipStore } from "../../stores/tooltip-store";
 import {
   ClockBody,
@@ -11,12 +10,15 @@ import {
 } from "./style";
 
 const Clock = () => {
-  // 시계 관련 상태
-  const { hourDegree, minuteDegree, secondDegree } = useClockStore().time;
-  const { setTimeDegrees } = useClockStore();
-
   // 툴팁 관련 상태
   const { setShowTooltip, setTooltipPosition } = useTooltipStore();
+
+  // 시계 관련 상태
+  const [timeDegrees, setTimeDegrees] = useState({
+    hourDegree: 0,
+    minuteDegree: 0,
+    secondDegree: 0,
+  });
 
   // 최초 렌더링시 현재 시각을 반영
   useEffect(() => {
@@ -25,31 +27,21 @@ const Clock = () => {
     const minute = date.getMinutes();
     const second = date.getSeconds();
 
-    const newSecondDegree = second * (360 / 60);
-    const newMinuteDegree = minute * (360 / 60) + second * (6 / 60);
-    const newHourDegree =
-      (hour % 12) * (360 / 24) + minute * (30 / 360) + second * (30 / 3600);
-
-    setTimeDegrees({ newHourDegree, newMinuteDegree, newSecondDegree });
+    const timeDegrees = timeToDegree(hour, minute, second);
+    setTimeDegrees(timeDegrees);
   }, []);
 
-  // 매초마다 각도를 업데이트
-  useEffect(() => {
-    const timer = setInterval(() => {
-      const secondIncrement = 360 / 60;
-      const minuteIncrement = 360 / 60 / 60;
-      const hourIncrement = 360 / 60 / 60 / 12;
+  // 시각을 각도로 변환
+  const timeToDegree = (hour, minute, second) => {
+    const secondDegree = second * (360 / 60);
+    const minuteDegree = minute * (360 / 60) + second * (6 / 60);
+    const hourDegree =
+      (hour % 12) * (360 / 24) + minute * (30 / 360) + second * (30 / 3600);
 
-      setTimeDegrees({
-        newHourDegree: hourDegree + hourIncrement,
-        newMinuteDegree: minuteDegree + minuteIncrement,
-        newSecondDegree: secondDegree + secondIncrement,
-      });
-    }, 1000);
+    return { hourDegree, minuteDegree, secondDegree };
+  };
 
-    return () => clearInterval(timer);
-  });
-
+  // 툴팁 위치를 마우스 위치로 지정
   const moveTooltip = (e) =>
     setTooltipPosition({ left: e.clientX, top: e.clientY });
 
@@ -60,9 +52,9 @@ const Clock = () => {
         onMouseLeave={() => setShowTooltip(false)}
         onMouseMove={(e) => moveTooltip(e)}
       >
-        <HourHand degree={hourDegree} />
-        <MinuteHand degree={minuteDegree} />
-        <SecondHand degree={secondDegree} />
+        <HourHand degree={timeDegrees.hourDegree} />
+        <MinuteHand degree={timeDegrees.minuteDegree} />
+        <SecondHand degree={timeDegrees.secondDegree} />
       </ClockBody>
     </ClockWrapper>
   );
