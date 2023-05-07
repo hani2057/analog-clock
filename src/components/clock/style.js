@@ -9,11 +9,17 @@ const ClockWrapper = styled.div`
 `;
 
 const ClockBody = styled.div`
+  width: auto;
   height: 70%;
   aspect-ratio: 1 / 1;
   border: 1px solid #000000;
   border-radius: 50%;
   position: relative;
+
+  @media screen and (max-width: 768px) {
+    width: 85%;
+    height: auto;
+  }
 `;
 
 const ClockHand = styled.div`
@@ -48,6 +54,7 @@ const SecondHand = styled(ClockHand)`
 `;
 
 const HourMarkerWrapper = styled(ClockBody)`
+  width: 100%;
   height: 100%;
   border: none;
 `;
