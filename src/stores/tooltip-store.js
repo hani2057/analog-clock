@@ -3,8 +3,8 @@ import { create } from "zustand";
 export const useTooltipStore = create((set) => ({
   tooltipState: {
     showTooltip: false,
-    left: 0,
-    top: 0,
+    left: "",
+    top: "",
   },
   setShowTooltip: (newState) => {
     set((state) => ({
